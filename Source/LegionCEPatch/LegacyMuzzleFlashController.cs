@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
+using CombatExtended;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -15,6 +17,9 @@ namespace LegionCEPatch
         private static readonly Dictionary<string, EffecterDef> EffectersByWeaponDefName =
             new Dictionary<string, EffecterDef>(StringComparer.OrdinalIgnoreCase);
 
+        private static readonly Dictionary<string, float> OriginalMuzzleFlashScaleByWeaponDefName =
+            new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+
         private static readonly Dictionary<Verb, int> LastProcessedShotTickByVerb =
             new Dictionary<Verb, int>();
 
@@ -26,6 +31,7 @@ namespace LegionCEPatch
         private static void RebuildLookup()
         {
             EffectersByWeaponDefName.Clear();
+            OriginalMuzzleFlashScaleByWeaponDefName.Clear();
             LastProcessedShotTickByVerb.Clear();
 
             var sourceMod = LoadedModManager.RunningModsListForReading.FirstOrDefault(
@@ -41,6 +47,7 @@ namespace LegionCEPatch
 
             var projectileEffecters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var sourceProjectilesByWeapon = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var sourceMuzzleFlashScaleByWeapon = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var asset in sourceMod.LoadDefs(false))
             {
@@ -71,6 +78,12 @@ namespace LegionCEPatch
                         if (!string.IsNullOrEmpty(projectileDefName) && !sourceProjectilesByWeapon.ContainsKey(defName))
                         {
                             sourceProjectilesByWeapon[defName] = projectileDefName;
+                        }
+
+                        var muzzleFlashScale = TryGetWeaponMuzzleFlashScale(thingDef);
+                        if (muzzleFlashScale.HasValue && !sourceMuzzleFlashScaleByWeapon.ContainsKey(defName))
+                        {
+                            sourceMuzzleFlashScaleByWeapon[defName] = muzzleFlashScale.Value;
                         }
                     }
                 }
@@ -108,6 +121,11 @@ namespace LegionCEPatch
                 if (effecterDef != null)
                 {
                     EffectersByWeaponDefName[currentWeapon.defName] = effecterDef;
+                }
+
+                if (sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScale))
+                {
+                    OriginalMuzzleFlashScaleByWeaponDefName[currentWeapon.defName] = originalMuzzleFlashScale;
                 }
             }
 
@@ -151,6 +169,8 @@ namespace LegionCEPatch
             var effecter = effecterDef.Spawn(targetInfoA, targetInfoB, 1f);
             effecter.Trigger(targetInfoA, targetInfoB);
             effecter.Cleanup();
+
+            TryNotifyCombatExtendedLighting(verb, equipment.def.defName, casterCell, map);
         }
 
         private static TargetInfo GetTargetInfo(Verb verb, Map map, TargetInfo fallback)
@@ -205,6 +225,54 @@ namespace LegionCEPatch
             }
 
             return null;
+        }
+
+        private static float? TryGetWeaponMuzzleFlashScale(XElement thingDef)
+        {
+            var verbsElement = thingDef.Element("verbs");
+            var firstVerb = verbsElement?.Elements("li").FirstOrDefault();
+            var rawValue = firstVerb?.Element("muzzleFlashScale")?.Value?.Trim();
+            if (string.IsNullOrEmpty(rawValue))
+            {
+                return null;
+            }
+
+            if (!float.TryParse(rawValue, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
+            {
+                return null;
+            }
+
+            return value;
+        }
+
+        private static void TryNotifyCombatExtendedLighting(Verb verb, string weaponDefName, IntVec3 shooterCell, Map map)
+        {
+            if (!(verb is Verb_LaunchProjectileCE launchVerb))
+            {
+                return;
+            }
+
+            if (!OriginalMuzzleFlashScaleByWeaponDefName.TryGetValue(weaponDefName, out var originalMuzzleFlashScale))
+            {
+                return;
+            }
+
+            if (originalMuzzleFlashScale <= 0f)
+            {
+                return;
+            }
+
+            var projectileProps = launchVerb.projectilePropsCE;
+            var muzzleFlashMultiplier = projectileProps?.muzzleFlashMultiplier ?? 1f;
+            var muzzleFlashOffset = projectileProps?.muzzleFlashOffset ?? 0f;
+            var intensity = Mathf.Max(0f, originalMuzzleFlashScale * muzzleFlashMultiplier + muzzleFlashOffset);
+            if (intensity <= 0f)
+            {
+                return;
+            }
+
+            var lightingTracker = map?.GetComponent<LightingTracker>();
+            lightingTracker?.Notify_ShotsFiredAt(shooterCell, intensity);
         }
     }
 }

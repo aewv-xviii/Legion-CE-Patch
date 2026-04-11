@@ -352,13 +352,6 @@
     </value>
   </Operation>
 
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/graphicData</xpath>
-    <value>
-      <drawOffset>(0.03,0,0.04)</drawOffset>
-    </value>
-  </Operation>
-
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/verbs/li[1]</xpath>
     <value>
@@ -443,6 +436,45 @@
     </value>
   </Operation>
 
+  <!-- Explicit comps remain safer on save/load for shotguns that carry serializable special comps. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_RiotShotgunA"]/comps</xpath>
+    <value>
+      <comps Inherit="False">
+        <li Class="CompProperties_EquippableAbilityReloadable">
+          <abilityDef>LGKS23FlashBangRound</abilityDef>
+          <maxCharges>2</maxCharges>
+          <soundReload>Standard_Reload</soundReload>
+          <chargeNoun>'Stella' Flashbang Shell</chargeNoun>
+          <ammoDef>Chemfuel</ammoDef>
+          <ammoCountPerCharge>20</ammoCountPerCharge>
+          <baseReloadTicks>60</baseReloadTicks>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>4</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>1.15</reloadTime>
+          <ammoSet>AmmoSet_23x75mmR</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="LG_AutomaticShotgunA"]/verbs/li[1]</xpath>
     <value>
@@ -459,6 +491,38 @@
         <soundCastTail>GunTail_Medium</soundCastTail>
         <muzzleFlashScale>0</muzzleFlashScale>
       </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_AutomaticShotgunA"]/comps</xpath>
+    <value>
+      <comps Inherit="False">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>10</magazineSize>
+          <reloadTime>6.8</reloadTime>
+          <ammoSet>AmmoSet_23x75mmR</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aimedBurstShotCount>2</aimedBurstShotCount>
+          <aiAimMode>SuppressFire</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li>
+          <compClass>CompEquippable</compClass>
+        </li>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+      </comps>
     </value>
   </Operation>
 
@@ -481,5 +545,36 @@
     </value>
   </Operation>
 
-</Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_BreachShotgun"]/comps</xpath>
+    <value>
+      <comps Inherit="False">
+        <li Class="CompProperties_EquippableAbility">
+          <abilityDef>LG_BreachingShell</abilityDef>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>6</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>0.95</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
 
+</Patch>
