@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_SpecOpsShotgun</defName>
+    <statBases>
+      <Mass>3.6</Mass>
+      <Bulk>6.4</Bulk>
+      <SightsEfficiency>1.05</SightsEfficiency>
+      <ShotSpread>0.12</ShotSpread>
+      <SwayFactor>0.9</SwayFactor>
+      <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.42</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+      <warmupTime>1.15</warmupTime>
+      <range>18</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisShotgunSuppressedFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>8</magazineSize>
+      <reloadTime>4.1</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_TrenchGun</defName>
+    <statBases>
+      <Mass>3.4</Mass>
+      <Bulk>8.6</Bulk>
+      <SightsEfficiency>1</SightsEfficiency>
+      <ShotSpread>0.14</ShotSpread>
+      <SwayFactor>1.18</SwayFactor>
+      <RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>2.52</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+      <warmupTime>0.8</warmupTime>
+      <range>16</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisOriasFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>5</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>0.9</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_TrenchGunBay</defName>
+    <statBases>
+      <Mass>3.7</Mass>
+      <Bulk>8.3</Bulk>
+      <SightsEfficiency>0.94</SightsEfficiency>
+      <ShotSpread>0.12</ShotSpread>
+      <SwayFactor>0.95</SwayFactor>
+      <RangedWeapon_Cooldown>1.02</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.58</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+      <warmupTime>1.25</warmupTime>
+      <range>15</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisOriasFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>5</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>0.9</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_LawShotgun</defName>
+    <statBases>
+      <Mass>3.6</Mass>
+      <Bulk>6.5</Bulk>
+      <SightsEfficiency>0.96</SightsEfficiency>
+      <ShotSpread>0.13</ShotSpread>
+      <SwayFactor>0.94</SwayFactor>
+      <RangedWeapon_Cooldown>0.96</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.5</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+      <warmupTime>1.25</warmupTime>
+      <range>16</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisOriasFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>6</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>1.0</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_LawShotgunRubber</defName>
+    <statBases>
+      <Mass>3.6</Mass>
+      <Bulk>6.5</Bulk>
+      <SightsEfficiency>0.96</SightsEfficiency>
+      <ShotSpread>0.12</ShotSpread>
+      <SwayFactor>0.92</SwayFactor>
+      <RangedWeapon_Cooldown>0.96</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.35</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Beanbag</defaultProjectile>
+      <warmupTime>1.2</warmupTime>
+      <range>13</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisOriasFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>6</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>1.0</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_RiotShotgunA</defName>
+    <statBases>
+      <Mass>4.2</Mass>
+      <Bulk>8.2</Bulk>
+      <SightsEfficiency>0.92</SightsEfficiency>
+      <ShotSpread>0.11</ShotSpread>
+      <SwayFactor>0.98</SwayFactor>
+      <RangedWeapon_Cooldown>1.02</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.72</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_23x75mmR_Beanbag</defaultProjectile>
+      <warmupTime>1.3</warmupTime>
+      <range>20</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisKS23Fire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>4</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>1.15</reloadTime>
+      <ammoSet>AmmoSet_23x75mmR</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_AutomaticShotgunA</defName>
+    <statBases>
+      <Mass>12.9</Mass>
+      <Bulk>18.5</Bulk>
+      <SightsEfficiency>0.72</SightsEfficiency>
+      <ShotSpread>0.2</ShotSpread>
+      <SwayFactor>1.22</SwayFactor>
+      <RangedWeapon_Cooldown>1.05</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <!-- TODO: No direct 4-gauge equivalent exists in CE. Using 23x75mmR as a conservative v1 stand-in. -->
+      <recoilAmount>2.4</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_23x75mmR_Buck</defaultProjectile>
+      <warmupTime>1.6</warmupTime>
+      <range>22</range>
+      <burstShotCount>4</burstShotCount>
+      <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+      <soundCast>AegisMinervaFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>10</magazineSize>
+      <reloadTime>6.8</reloadTime>
+      <ammoSet>AmmoSet_23x75mmR</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aimedBurstShotCount>2</aimedBurstShotCount>
+      <aiAimMode>SuppressFire</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>LG_BreachShotgun</defName>
+    <statBases>
+      <Mass>2.9</Mass>
+      <Bulk>6.1</Bulk>
+      <SightsEfficiency>0.94</SightsEfficiency>
+      <ShotSpread>0.12</ShotSpread>
+      <SwayFactor>0.9</SwayFactor>
+      <RangedWeapon_Cooldown>0.95</RangedWeapon_Cooldown>
+    </statBases>
+    <Properties>
+      <recoilAmount>1.38</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+      <warmupTime>1.15</warmupTime>
+      <range>15.5</range>
+      <burstShotCount>1</burstShotCount>
+      <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+      <soundCast>AegisMinervaFire</soundCast>
+      <soundCastTail>GunTail_Medium</soundCastTail>
+      <muzzleFlashScale>9</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>6</magazineSize>
+      <reloadOneAtATime>true</reloadOneAtATime>
+      <reloadTime>0.95</reloadTime>
+      <ammoSet>AmmoSet_12Gauge</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>Snapshot</aiAimMode>
+      <noSingleShot>true</noSingleShot>
+    </FireModes>
+    <weaponTags>
+      <li>CE_AI_BROOM</li>
+    </weaponTags>
+  </Operation>
+
+  <!-- Shotgunz weapons need an explicit CE verb/comps override or they keep their custom ammo-less shot logic. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_SpecOpsShotgun"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.42</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+          <warmupTime>1.15</warmupTime>
+          <range>18</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisShotgunSuppressedFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_SpecOpsShotgun"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>8</magazineSize>
+          <reloadTime>4.1</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGun"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>2.52</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+          <warmupTime>0.8</warmupTime>
+          <range>16</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisOriasFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGun"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>5</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>0.9</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+        <li Class="WeaponSwitch.CompProperties_SwitchWeapon">
+          <weaponsToSwitch>
+            <li>
+              <label>Fix Bayonet</label>
+              <description>Fix bayonet to relentlessly charge towards enemies.</description>
+              <texPath>Icon/TrenchgunBayAttach</texPath>
+              <weapon>LG_TrenchGunBay</weapon>
+              <retainAmmoOnTransfer>true</retainAmmoOnTransfer>
+              <ticksToSwitchWeapon>400</ticksToSwitchWeapon>
+            </li>
+          </weaponsToSwitch>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/graphicData/drawSize</xpath>
+    <value>
+      <drawSize>1.62</drawSize>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/graphicData</xpath>
+    <value>
+      <drawOffset>(0.03,0,0.04)</drawOffset>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.58</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+          <warmupTime>1.25</warmupTime>
+          <range>15</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisOriasFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>5</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>0.9</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+        <li Class="WeaponSwitch.CompProperties_SwitchWeapon">
+          <weaponsToSwitch>
+            <li>
+              <label>Detach Bayonet</label>
+              <description>Detach bayonet from the barrel</description>
+              <texPath>Icon/TrenchgunBayDetach</texPath>
+              <weapon>LG_TrenchGun</weapon>
+              <retainAmmoOnTransfer>true</retainAmmoOnTransfer>
+              <ticksToSwitchWeapon>400</ticksToSwitchWeapon>
+            </li>
+          </weaponsToSwitch>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_LawShotgun"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.5</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+          <warmupTime>1.25</warmupTime>
+          <range>16</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisOriasFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_LawShotgun"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>6</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>1.0</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_LawShotgunRubber"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.35</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Beanbag</defaultProjectile>
+          <warmupTime>1.2</warmupTime>
+          <range>13</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisOriasFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_LawShotgunRubber"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>6</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>1.0</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_RiotShotgunA"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.72</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_23x75mmR_Beanbag</defaultProjectile>
+          <warmupTime>1.3</warmupTime>
+          <range>20</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisKS23Fire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_RiotShotgunA"]/comps</xpath>
+    <value>
+      <comps Inherit="False">
+        <li Class="CompProperties_EquippableAbilityReloadable">
+          <abilityDef>LGKS23FlashBangRound</abilityDef>
+          <maxCharges>2</maxCharges>
+          <soundReload>Standard_Reload</soundReload>
+          <chargeNoun>'Stella' Flashbang Shell</chargeNoun>
+          <ammoDef>Chemfuel</ammoDef>
+          <ammoCountPerCharge>20</ammoCountPerCharge>
+          <baseReloadTicks>60</baseReloadTicks>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>4</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>1.15</reloadTime>
+          <ammoSet>AmmoSet_23x75mmR</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_AutomaticShotgunA"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>2.4</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_23x75mmR_Buck</defaultProjectile>
+          <warmupTime>1.6</warmupTime>
+          <range>22</range>
+          <burstShotCount>4</burstShotCount>
+          <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+          <soundCast>AegisMinervaFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_AutomaticShotgunA"]/comps</xpath>
+    <value>
+      <comps Inherit="True">
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>10</magazineSize>
+          <reloadTime>6.8</reloadTime>
+          <ammoSet>AmmoSet_23x75mmR</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aimedBurstShotCount>2</aimedBurstShotCount>
+          <aiAimMode>SuppressFire</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_BreachShotgun"]/verbs</xpath>
+    <value>
+      <verbs>
+        <li Class="CombatExtended.VerbPropertiesCE">
+          <recoilAmount>1.38</recoilAmount>
+          <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          <hasStandardCommand>true</hasStandardCommand>
+          <defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+          <warmupTime>1.15</warmupTime>
+          <range>15.5</range>
+          <burstShotCount>1</burstShotCount>
+          <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+          <soundCast>AegisMinervaFire</soundCast>
+          <soundCastTail>GunTail_Medium</soundCastTail>
+          <muzzleFlashScale>9</muzzleFlashScale>
+        </li>
+      </verbs>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_BreachShotgun"]/comps</xpath>
+    <value>
+      <comps Inherit="False">
+        <li Class="CompProperties_EquippableAbility">
+          <abilityDef>LG_BreachingShell</abilityDef>
+        </li>
+        <li Class="CompProperties_Forbiddable"/>
+        <li Class="CompProperties_Styleable"/>
+        <li Class="CompProperties_Biocodable"/>
+        <li>
+          <compClass>CompQuality</compClass>
+        </li>
+        <li Class="CompProperties_Art">
+          <nameMaker>NamerArtWeaponGun</nameMaker>
+          <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+          <minQualityForArtistic>Excellent</minQualityForArtistic>
+        </li>
+        <li Class="CombatExtended.CompProperties_AmmoUser">
+          <magazineSize>6</magazineSize>
+          <reloadOneAtATime>true</reloadOneAtATime>
+          <reloadTime>0.95</reloadTime>
+          <ammoSet>AmmoSet_12Gauge</ammoSet>
+        </li>
+        <li Class="CombatExtended.CompProperties_FireModes">
+          <aiAimMode>Snapshot</aiAimMode>
+          <noSingleShot>true</noSingleShot>
+        </li>
+      </comps>
+    </value>
+  </Operation>
+
+</Patch>

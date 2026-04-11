@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_FlakJacket"]/statBases</xpath>
+    <value>
+      <Bulk>5</Bulk>
+      <WornBulk>2.5</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_MPVest"]/statBases</xpath>
+    <value>
+      <Bulk>5</Bulk>
+      <WornBulk>3</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_LightPlate"]/statBases</xpath>
+    <value>
+      <Bulk>18</Bulk>
+      <WornBulk>5</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_AdaptivePlate"]/statBases</xpath>
+    <value>
+      <Bulk>20</Bulk>
+      <WornBulk>6</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_HeavyPlate"]/statBases</xpath>
+    <value>
+      <Bulk>28</Bulk>
+      <WornBulk>8</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_RecycledPowerArmor"]/statBases</xpath>
+    <value>
+      <Bulk>90</Bulk>
+      <WornBulk>14</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_PowerArmor"]/statBases</xpath>
+    <value>
+      <Bulk>100</Bulk>
+      <WornBulk>15</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LG_RecycledPowerArmor"]/equippedStatOffsets</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LG_RecycledPowerArmor"]</xpath>
+      <value>
+        <equippedStatOffsets />
+      </value>
+    </nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_RecycledPowerArmor"]/equippedStatOffsets</xpath>
+    <value>
+      <CarryWeight>60</CarryWeight>
+      <CarryBulk>8</CarryBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LG_PowerArmor"]/equippedStatOffsets</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LG_PowerArmor"]</xpath>
+      <value>
+        <equippedStatOffsets />
+      </value>
+    </nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_PowerArmor"]/equippedStatOffsets</xpath>
+    <value>
+      <CarryWeight>80</CarryWeight>
+      <CarryBulk>10</CarryBulk>
+      <ShootingAccuracyPawn>0.12</ShootingAccuracyPawn>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_MPHelmet" or defName="LG_FlakHelmet" or defName="LG_RecycledHeavyHelmet" or defName="LG_PowerHelmet"]/statBases</xpath>
+    <value>
+      <Bulk>4</Bulk>
+      <WornBulk>1</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_BallisticMask" or defName="LG_GasMask"]/statBases</xpath>
+    <value>
+      <Bulk>2</Bulk>
+      <WornBulk>1</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Goggle"]/statBases</xpath>
+    <value>
+      <Bulk>1</Bulk>
+      <WornBulk>0.5</WornBulk>
+    </value>
+  </Operation>
+
+</Patch>

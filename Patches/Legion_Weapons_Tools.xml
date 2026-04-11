@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Colt" or defName="LG_HeavyRev" or defName="LG_OldRev"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>grip</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>4</power>
+          <cooldownTime>1.85</cooldownTime>
+          <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Grip</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>5</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>1.63</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_MP5K" or defName="LG_RealMP5Special" or defName="LG_P90A" or defName="LG_PlasSMG"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>grip</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>6</power>
+          <cooldownTime>1.7</cooldownTime>
+          <armorPenetrationBlunt>2.1</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Grip</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>6</power>
+          <cooldownTime>1.7</cooldownTime>
+          <armorPenetrationBlunt>2.1</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_FNFAL" or defName="LG_BARA" or defName="LG_BARB" or defName="LG_DefDMR" or defName="LG_GrenadeRifle" or defName="LG_M16A1A" or defName="LG_M16A1C" or defName="LG_M16A1D" or defName="LG_MartiniHenry" or defName="LG_PlasRifle" or defName="LG_PlasRifleGrenadier" or defName="LG_PlasRifleMedic" or defName="LG_PlasSniperRifle" or defName="LG_PrecisionRifleA" or defName="LG_PrecisionRifleB" or defName="LG_SMGM16A" or defName="LG_ShortM16A" or defName="LG_ShortM16B" or defName="LG_SpecOpsCombatRifleA" or defName="LG_SpecOpsCombatRifleB" or defName="LG_SpringField" or defName="LG_XM7A" or defName="LG_XM7B"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.55</cooldownTime>
+          <chanceFactor>1.5</chanceFactor>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>5</power>
+          <cooldownTime>2.02</cooldownTime>
+          <armorPenetrationBlunt>1.63</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>muzzle</label>
+          <capacities>
+            <li>Poke</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.55</cooldownTime>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_M16A1B"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.55</cooldownTime>
+          <chanceFactor>1.2</chanceFactor>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>bayonet</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>12</power>
+          <cooldownTime>1.6</cooldownTime>
+          <armorPenetrationSharp>1.15</armorPenetrationSharp>
+          <armorPenetrationBlunt>3.2</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_PlasRifleBay"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.55</cooldownTime>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>chainsaw</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>16</power>
+          <cooldownTime>1.2</cooldownTime>
+          <armorPenetrationSharp>1.8</armorPenetrationSharp>
+          <armorPenetrationBlunt>4.6</armorPenetrationBlunt>
+          <soundMeleeHit>AegisChainswordSwing</soundMeleeHit>
+          <soundMeleeMiss>AegisChainswordSwing</soundMeleeMiss>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGun" or defName="LG_SpecOpsShotgun" or defName="LG_LawShotgun" or defName="LG_LawShotgunRubber" or defName="LG_RiotShotgunA" or defName="LG_AutomaticShotgunA" or defName="LG_BreachShotgun"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.6</cooldownTime>
+          <chanceFactor>1.35</chanceFactor>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>5</power>
+          <cooldownTime>2.0</cooldownTime>
+          <armorPenetrationBlunt>1.63</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>muzzle</label>
+          <capacities>
+            <li>Poke</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.6</cooldownTime>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_AMR" or defName="LG_AMRGuard" or defName="LG_BigFuckingRifleA" or defName="LG_BigFuckingRifleB" or defName="LG_LightMGModerate"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>10</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>7</power>
+          <cooldownTime>2.1</cooldownTime>
+          <armorPenetrationBlunt>2.2</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>muzzle</label>
+          <capacities>
+            <li>Poke</li>
+          </capacities>
+          <power>10</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_HMGfifty" or defName="LG_Minigunfifty" or defName="LG_GrenadeMachineGun" or defName="LG_RecoillessRifle"]</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>10</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>barrel</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>7</power>
+          <cooldownTime>2.1</cooldownTime>
+          <armorPenetrationBlunt>2.2</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>muzzle</label>
+          <capacities>
+            <li>Poke</li>
+          </capacities>
+          <power>10</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Gladius"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>point</label>
+          <capacities>
+            <li>Stab</li>
+          </capacities>
+          <power>16</power>
+          <cooldownTime>1.65</cooldownTime>
+          <armorPenetrationSharp>1.15</armorPenetrationSharp>
+          <armorPenetrationBlunt>3.2</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Cut</li>
+          </capacities>
+          <power>16</power>
+          <cooldownTime>1.65</cooldownTime>
+          <armorPenetrationSharp>1.15</armorPenetrationSharp>
+          <armorPenetrationBlunt>3.2</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_CombatShovel"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>club</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>15.7</power>
+          <cooldownTime>1.8</cooldownTime>
+          <armorPenetrationBlunt>4.6</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Cut</li>
+          </capacities>
+          <power>14</power>
+          <cooldownTime>1.8</cooldownTime>
+          <armorPenetrationSharp>0.7</armorPenetrationSharp>
+          <armorPenetrationBlunt>3.8</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Rhompheia"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Cut</li>
+          </capacities>
+          <power>25</power>
+          <cooldownTime>3</cooldownTime>
+          <armorPenetrationSharp>1.8</armorPenetrationSharp>
+          <armorPenetrationBlunt>6.2</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Sabrenorm"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>tip</label>
+          <capacities>
+            <li>Stab</li>
+          </capacities>
+          <power>18</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationSharp>1.35</armorPenetrationSharp>
+          <armorPenetrationBlunt>4.1</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Cut</li>
+          </capacities>
+          <power>20</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationSharp>1.5</armorPenetrationSharp>
+          <armorPenetrationBlunt>4.6</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_SabrePlas"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>tip</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>24</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationSharp>2.1</armorPenetrationSharp>
+          <armorPenetrationBlunt>5.8</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>24</power>
+          <cooldownTime>2.3</cooldownTime>
+          <armorPenetrationSharp>2.1</armorPenetrationSharp>
+          <armorPenetrationBlunt>5.8</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_StunBaton"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>6</power>
+          <cooldownTime>1.5</cooldownTime>
+          <armorPenetrationBlunt>1.8</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>head</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>1.5</cooldownTime>
+          <armorPenetrationBlunt>2.8</armorPenetrationBlunt>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>1</amount>
+            </li>
+          </extraMeleeDamages>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Chainsword"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>edge</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>17</power>
+          <cooldownTime>1.2</cooldownTime>
+          <armorPenetrationSharp>1.7</armorPenetrationSharp>
+          <armorPenetrationBlunt>4.8</armorPenetrationBlunt>
+          <soundMeleeHit>AegisChainswordSwing</soundMeleeHit>
+          <soundMeleeMiss>AegisChainswordSwing</soundMeleeMiss>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_SpearPlas"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>tip</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>27</power>
+          <cooldownTime>3</cooldownTime>
+          <armorPenetrationSharp>2.25</armorPenetrationSharp>
+          <armorPenetrationBlunt>6.4</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_BreachingTool"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>2</cooldownTime>
+          <armorPenetrationBlunt>2.7</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>hammer</label>
+          <capacities>
+            <li>Demolish</li>
+          </capacities>
+          <power>18</power>
+          <cooldownTime>3</cooldownTime>
+          <armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>crowbar edge</label>
+          <capacities>
+            <li>Cut</li>
+          </capacities>
+          <power>14</power>
+          <cooldownTime>3</cooldownTime>
+          <armorPenetrationSharp>0.75</armorPenetrationSharp>
+          <armorPenetrationBlunt>4.0</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Whip"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>handle</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>6</power>
+          <cooldownTime>2</cooldownTime>
+          <chanceFactor>0.1</chanceFactor>
+          <armorPenetrationBlunt>1.6</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>whip</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>10</power>
+          <cooldownTime>2.2</cooldownTime>
+          <soundMeleeHit>AegisWhip</soundMeleeHit>
+          <extraMeleeDamages>
+            <li>
+              <def>Damage_WhipLG</def>
+              <amount>1</amount>
+            </li>
+          </extraMeleeDamages>
+          <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+          <chanceFactor>2</chanceFactor>
+          <armorPenetrationBlunt>2.4</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_TrenchGunBay"]/tools</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>stock</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>1.6</cooldownTime>
+          <chanceFactor>1.2</chanceFactor>
+          <armorPenetrationBlunt>2.755</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>bayonet</label>
+          <capacities>
+            <li>Stab</li>
+            <li>Cut</li>
+          </capacities>
+          <power>14</power>
+          <cooldownTime>1.55</cooldownTime>
+          <armorPenetrationSharp>1.25</armorPenetrationSharp>
+          <armorPenetrationBlunt>3.4</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_LightFlamer" or defName="LG_HeavyFlamer" or defName="LG_HeavyPlasmaMGA" or defName="LG_HeavyPlasmaMGB"]</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>housing</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>9</power>
+          <cooldownTime>1.95</cooldownTime>
+          <armorPenetrationBlunt>2.9</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>nozzle</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>8</power>
+          <cooldownTime>2.05</cooldownTime>
+          <armorPenetrationBlunt>2.4</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Medigunbelt"]</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>grip</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>4</power>
+          <cooldownTime>1.85</cooldownTime>
+          <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+        </li>
+        <li Class="CombatExtended.ToolCE">
+          <label>injector</label>
+          <capacities>
+            <li>Blunt</li>
+            <li>Poke</li>
+          </capacities>
+          <power>5</power>
+          <cooldownTime>1.9</cooldownTime>
+          <armorPenetrationBlunt>1.63</armorPenetrationBlunt>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+</Patch>
