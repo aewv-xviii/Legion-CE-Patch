@@ -21,7 +21,7 @@
       <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
       <soundCast>AegisMinervaFire</soundCast>
       <soundCastTail>GunTail_Heavy</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>1</magazineSize>
@@ -57,7 +57,7 @@
       <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
       <soundCast>AegisMinervaFire</soundCast>
       <soundCastTail>GunTail_Heavy</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>10</magazineSize>

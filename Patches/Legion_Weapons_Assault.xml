@@ -21,7 +21,7 @@
       <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
       <soundCast>AegisMP5Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>
@@ -57,7 +57,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisM16Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>
@@ -94,7 +94,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisMoiraiSuppressedFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>
@@ -131,7 +131,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisM16Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>
@@ -168,7 +168,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisM16Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>
@@ -205,7 +205,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisM16Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>30</magazineSize>

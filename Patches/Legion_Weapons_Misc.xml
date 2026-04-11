@@ -20,7 +20,7 @@
       <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
       <soundCast>AegisHevRevFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>4</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>6</magazineSize>
@@ -55,7 +55,7 @@
       <range>50</range>
       <soundCast>AegisM14FIRE</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>20</magazineSize>
@@ -90,7 +90,7 @@
       <ticksBetweenBurstShots>25</ticksBetweenBurstShots>
       <soundCast>AegisLightGrenadeLauncherFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
       <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
       <targetParams>
         <canTargetLocations>true</canTargetLocations>
@@ -129,7 +129,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisM16Fire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>25</magazineSize>
@@ -164,7 +164,7 @@
       <range>52</range>
       <soundCast>AegisMartiniSuppressedFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>1</magazineSize>
@@ -200,7 +200,7 @@
       <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>24</magazineSize>
@@ -237,7 +237,7 @@
       <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>24</magazineSize>
@@ -274,7 +274,7 @@
       <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
       <soundCast>AegisBullSuppressedFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>20</magazineSize>
@@ -311,7 +311,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisBullSuppressedFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>20</magazineSize>
@@ -349,7 +349,7 @@
       <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
       <soundCast>AegisLGLMGFIRE</soundCast>
       <soundCastTail>GunTail_Heavy</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>60</magazineSize>
@@ -385,7 +385,7 @@
       <range>46</range>
       <soundCast>AegisMinervaFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
       <targetParams>
         <canTargetLocations>true</canTargetLocations>
         <canTargetPawns>true</canTargetPawns>
@@ -424,7 +424,7 @@
       <range>78</range>
       <soundCast>AegisMinervaFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
       <targetParams>
         <canTargetLocations>true</canTargetLocations>
         <canTargetPawns>true</canTargetPawns>

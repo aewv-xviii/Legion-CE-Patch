@@ -21,7 +21,7 @@
       <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>24</magazineSize>
@@ -57,7 +57,7 @@
       <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>24</magazineSize>
@@ -94,7 +94,7 @@
       <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>24</magazineSize>
@@ -129,7 +129,7 @@
       <range>72</range>
       <soundCast>AegisPlasmaRifleFire</soundCast>
       <soundCastTail>GunTail_Medium</soundCastTail>
-      <muzzleFlashScale>9</muzzleFlashScale>
+      <muzzleFlashScale>0</muzzleFlashScale>
     </Properties>
     <AmmoUser>
       <magazineSize>8</magazineSize>
