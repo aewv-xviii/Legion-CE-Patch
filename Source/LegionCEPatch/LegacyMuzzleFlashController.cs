@@ -13,6 +13,17 @@ namespace LegionCEPatch
     public static class LegacyMuzzleFlashController
     {
         private const string SourcePackageId = "Dogdough.Aegiscorp";
+        private const bool DebugLightingLogs = true;
+
+        private sealed class WeaponFlashDiagnostic
+        {
+            public string WeaponDefName;
+            public string SourceProjectileDefName;
+            public string CurrentProjectileDefName;
+            public string EffecterDefName;
+            public float? OriginalMuzzleFlashScale;
+            public bool RegisteredLegacyFlash;
+        }
 
         private static readonly Dictionary<string, EffecterDef> EffectersByWeaponDefName =
             new Dictionary<string, EffecterDef>(StringComparer.OrdinalIgnoreCase);
@@ -20,8 +31,14 @@ namespace LegionCEPatch
         private static readonly Dictionary<string, float> OriginalMuzzleFlashScaleByWeaponDefName =
             new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
+        private static readonly Dictionary<string, WeaponFlashDiagnostic> DiagnosticsByWeaponDefName =
+            new Dictionary<string, WeaponFlashDiagnostic>(StringComparer.OrdinalIgnoreCase);
+
         private static readonly Dictionary<Verb, int> LastProcessedShotTickByVerb =
             new Dictionary<Verb, int>();
+
+        private static readonly HashSet<string> LoggedMissingDiagnostics =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         public static void Initialize()
         {
@@ -32,7 +49,9 @@ namespace LegionCEPatch
         {
             EffectersByWeaponDefName.Clear();
             OriginalMuzzleFlashScaleByWeaponDefName.Clear();
+            DiagnosticsByWeaponDefName.Clear();
             LastProcessedShotTickByVerb.Clear();
+            LoggedMissingDiagnostics.Clear();
 
             var sourceMod = LoadedModManager.RunningModsListForReading.FirstOrDefault(
                 mod =>
@@ -95,11 +114,6 @@ namespace LegionCEPatch
 
             foreach (var pair in sourceProjectilesByWeapon)
             {
-                if (!projectileEffecters.TryGetValue(pair.Value, out var effecterDefName))
-                {
-                    continue;
-                }
-
                 var currentWeapon = DefDatabase<ThingDef>.GetNamedSilentFail(pair.Key);
                 if (currentWeapon == null)
                 {
@@ -107,7 +121,27 @@ namespace LegionCEPatch
                 }
 
                 var currentProjectileDefName = currentWeapon.Verbs?.FirstOrDefault()?.defaultProjectile?.defName;
-                if (string.IsNullOrEmpty(currentProjectileDefName))
+                projectileEffecters.TryGetValue(pair.Value, out var effecterDefName);
+                sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScaleValue);
+
+                var diagnostic = new WeaponFlashDiagnostic
+                {
+                    WeaponDefName = currentWeapon.defName,
+                    SourceProjectileDefName = pair.Value,
+                    CurrentProjectileDefName = currentProjectileDefName,
+                    EffecterDefName = effecterDefName,
+                    OriginalMuzzleFlashScale = sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScale)
+                        ? originalMuzzleFlashScale
+                        : (float?)null
+                };
+                DiagnosticsByWeaponDefName[currentWeapon.defName] = diagnostic;
+
+                if (sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScaleForRegistration))
+                {
+                    OriginalMuzzleFlashScaleByWeaponDefName[currentWeapon.defName] = originalMuzzleFlashScaleForRegistration;
+                }
+
+                if (string.IsNullOrEmpty(effecterDefName) || string.IsNullOrEmpty(currentProjectileDefName))
                 {
                     continue;
                 }
@@ -121,15 +155,24 @@ namespace LegionCEPatch
                 if (effecterDef != null)
                 {
                     EffectersByWeaponDefName[currentWeapon.defName] = effecterDef;
-                }
-
-                if (sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScale))
-                {
-                    OriginalMuzzleFlashScaleByWeaponDefName[currentWeapon.defName] = originalMuzzleFlashScale;
+                    diagnostic.RegisteredLegacyFlash = true;
                 }
             }
 
             Log.Message($"[Legion CE Patch] Registered legacy muzzle flashes for {EffectersByWeaponDefName.Count} CE-converted Legion weapons.");
+            if (DebugLightingLogs)
+            {
+                foreach (var diagnostic in DiagnosticsByWeaponDefName.Values.OrderBy(item => item.WeaponDefName))
+                {
+                    Log.Message(
+                        $"[Legion CE Patch] Flash map {diagnostic.WeaponDefName}: " +
+                        $"registered={diagnostic.RegisteredLegacyFlash}, " +
+                        $"sourceProjectile={diagnostic.SourceProjectileDefName}, " +
+                        $"currentProjectile={diagnostic.CurrentProjectileDefName}, " +
+                        $"effecter={diagnostic.EffecterDefName}, " +
+                        $"originalScale={(diagnostic.OriginalMuzzleFlashScale?.ToString(CultureInfo.InvariantCulture) ?? "null")}.");
+                }
+            }
         }
 
         public static void TryTrigger(Verb verb)
@@ -146,8 +189,12 @@ namespace LegionCEPatch
                 return;
             }
 
-            if (!EffectersByWeaponDefName.TryGetValue(equipment.def.defName, out var effecterDef))
+            var weaponDefName = equipment.def.defName;
+            var hasLegacyEffecter = EffectersByWeaponDefName.TryGetValue(weaponDefName, out var effecterDef);
+            var hasOriginalMuzzleFlashScale = OriginalMuzzleFlashScaleByWeaponDefName.ContainsKey(weaponDefName);
+            if (!hasLegacyEffecter && !hasOriginalMuzzleFlashScale)
             {
+                TryLogMissingDiagnostic(weaponDefName, verb);
                 return;
             }
 
@@ -164,13 +211,16 @@ namespace LegionCEPatch
             var targetInfoA = new TargetInfo(casterCell, map, false);
             var targetInfoB = GetTargetInfo(verb, map, targetInfoA);
 
-            // Legion's muzzle flash effecters already encode their own forward offset and
-            // source/target relationship via offsetTowardsTarget + spawnLocType=OnSource.
-            var effecter = effecterDef.Spawn(targetInfoA, targetInfoB, 1f);
-            effecter.Trigger(targetInfoA, targetInfoB);
-            effecter.Cleanup();
+            if (hasLegacyEffecter)
+            {
+                // Legion's muzzle flash effecters already encode their own forward offset and
+                // source/target relationship via offsetTowardsTarget + spawnLocType=OnSource.
+                var effecter = effecterDef.Spawn(targetInfoA, targetInfoB, 1f);
+                effecter.Trigger(targetInfoA, targetInfoB);
+                effecter.Cleanup();
+            }
 
-            TryNotifyCombatExtendedLighting(verb, equipment.def.defName, casterCell, map);
+            TryNotifyCombatExtendedLighting(verb, equipment, caster, targetInfoB, map);
         }
 
         private static TargetInfo GetTargetInfo(Verb verb, Map map, TargetInfo fallback)
@@ -245,34 +295,119 @@ namespace LegionCEPatch
             return value;
         }
 
-        private static void TryNotifyCombatExtendedLighting(Verb verb, string weaponDefName, IntVec3 shooterCell, Map map)
+        private static void TryLogMissingDiagnostic(string weaponDefName, Verb verb)
         {
-            if (!(verb is Verb_LaunchProjectileCE launchVerb))
+            if (!DebugLightingLogs || !LoggedMissingDiagnostics.Add(weaponDefName))
             {
                 return;
             }
 
+            if (!DiagnosticsByWeaponDefName.TryGetValue(weaponDefName, out var diagnostic))
+            {
+                Log.Message(
+                    $"[Legion CE Patch] No flash diagnostics for {weaponDefName}. " +
+                    $"Verb={verb.GetType().FullName}, currentProjectile={verb.verbProps?.defaultProjectile?.defName ?? "null"}.");
+                return;
+            }
+
+            Log.Message(
+                $"[Legion CE Patch] Missing legacy flash mapping for {weaponDefName}. " +
+                $"Verb={verb.GetType().FullName}, " +
+                $"sourceProjectile={diagnostic.SourceProjectileDefName}, " +
+                $"currentProjectile={diagnostic.CurrentProjectileDefName}, " +
+                $"effecter={diagnostic.EffecterDefName}, " +
+                $"originalScale={(diagnostic.OriginalMuzzleFlashScale?.ToString(CultureInfo.InvariantCulture) ?? "null")}, " +
+                $"registered={diagnostic.RegisteredLegacyFlash}.");
+        }
+
+        private static void TryNotifyCombatExtendedLighting(Verb verb, ThingWithComps equipment, Thing caster, TargetInfo targetInfoB, Map map)
+        {
+            var weaponDefName = equipment.def.defName;
             if (!OriginalMuzzleFlashScaleByWeaponDefName.TryGetValue(weaponDefName, out var originalMuzzleFlashScale))
             {
+                if (DebugLightingLogs)
+                {
+                    Log.Message($"[Legion CE Patch] Skipped CE lighting for {weaponDefName}: no original muzzleFlashScale found.");
+                }
+
                 return;
             }
 
             if (originalMuzzleFlashScale <= 0f)
             {
+                if (DebugLightingLogs)
+                {
+                    Log.Message($"[Legion CE Patch] Skipped CE lighting for {weaponDefName}: original muzzleFlashScale={originalMuzzleFlashScale.ToString(CultureInfo.InvariantCulture)}.");
+                }
+
                 return;
             }
 
-            var projectileProps = launchVerb.projectilePropsCE;
-            var muzzleFlashMultiplier = projectileProps?.muzzleFlashMultiplier ?? 1f;
-            var muzzleFlashOffset = projectileProps?.muzzleFlashOffset ?? 0f;
+            var muzzleFlashMultiplier = 1f;
+            var muzzleFlashOffset = 0f;
+            if (verb is Verb_LaunchProjectileCE launchVerb)
+            {
+                var projectileProps = launchVerb.projectilePropsCE;
+                muzzleFlashMultiplier = projectileProps?.muzzleFlashMultiplier ?? 1f;
+                muzzleFlashOffset = projectileProps?.muzzleFlashOffset ?? 0f;
+            }
+
             var intensity = Mathf.Max(0f, originalMuzzleFlashScale * muzzleFlashMultiplier + muzzleFlashOffset);
             if (intensity <= 0f)
             {
+                if (DebugLightingLogs)
+                {
+                    Log.Message(
+                        $"[Legion CE Patch] Skipped CE lighting for {weaponDefName}: computed intensity={intensity.ToString(CultureInfo.InvariantCulture)} " +
+                        $"from originalScale={originalMuzzleFlashScale.ToString(CultureInfo.InvariantCulture)}, " +
+                        $"multiplier={muzzleFlashMultiplier.ToString(CultureInfo.InvariantCulture)}, " +
+                        $"offset={muzzleFlashOffset.ToString(CultureInfo.InvariantCulture)}.");
+                }
+
                 return;
             }
 
+            var visualFlashLocation = GetVisualFlashLocation(caster, equipment, targetInfoB);
             var lightingTracker = map?.GetComponent<LightingTracker>();
-            lightingTracker?.Notify_ShotsFiredAt(shooterCell, intensity);
+            if (lightingTracker == null)
+            {
+                if (DebugLightingLogs)
+                {
+                    Log.Message($"[Legion CE Patch] Skipped CE lighting for {weaponDefName}: LightingTracker missing on map.");
+                }
+
+                return;
+            }
+
+            FleckMakerCE.Static(visualFlashLocation, map, FleckDefOf.ShotFlash, intensity);
+            lightingTracker.Notify_ShotsFiredAt(caster.PositionHeld, intensity);
+
+            if (DebugLightingLogs)
+            {
+                Log.Message(
+                    $"[Legion CE Patch] CE lighting notified for {weaponDefName} at {caster.PositionHeld} with visual flash at {visualFlashLocation}: " +
+                    $"verb={verb.GetType().FullName}, " +
+                    $"originalScale={originalMuzzleFlashScale.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"multiplier={muzzleFlashMultiplier.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"offset={muzzleFlashOffset.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"intensity={intensity.ToString(CultureInfo.InvariantCulture)}.");
+            }
         }
+
+        private static Vector3 GetVisualFlashLocation(Thing caster, ThingWithComps equipment, TargetInfo targetInfo)
+        {
+            var source = caster.DrawPos;
+            var target = targetInfo.IsValid ? targetInfo.CenterVector3 : source + Vector3.forward;
+            var direction = (target - source).normalized;
+            if (direction == Vector3.zero)
+            {
+                direction = Vector3.forward;
+            }
+
+            var drawSize = equipment.def.graphicData?.drawSize.x ?? 1f;
+            var forwardOffset = Mathf.Clamp(drawSize * 0.42f, 0.35f, 0.95f);
+            return source + direction * forwardOffset;
+        }
+
     }
 }
