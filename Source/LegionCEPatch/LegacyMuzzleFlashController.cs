@@ -37,6 +37,13 @@ namespace LegionCEPatch
         private static readonly HashSet<string> PlasmaBeamWeaponDefNames =
             new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
+        private static readonly HashSet<string> SupplementalFlashSuppressedWeaponDefNames =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "LG_LightFlamer",
+                "LG_HeavyFlamer"
+            };
+
         private static readonly Dictionary<Verb, int> LastProcessedShotTickByVerb =
             new Dictionary<Verb, int>();
 
@@ -370,6 +377,16 @@ namespace LegionCEPatch
         private static void TryNotifyCombatExtendedLighting(Verb verb, ThingWithComps equipment, Thing caster, TargetInfo targetInfoB, Map map)
         {
             var weaponDefName = equipment.def.defName;
+            if (SupplementalFlashSuppressedWeaponDefNames.Contains(weaponDefName))
+            {
+                if (DebugLightingLogs)
+                {
+                    Log.Message($"[Legion CE Patch] Skipped supplemental flash for {weaponDefName}: suppressed by override.");
+                }
+
+                return;
+            }
+
             if (!OriginalMuzzleFlashScaleByWeaponDefName.TryGetValue(weaponDefName, out var originalMuzzleFlashScale))
             {
                 if (DebugLightingLogs)

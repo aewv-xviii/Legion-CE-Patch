@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- Suppress vanilla-style muzzle flashes on exception-group weapons whose own
+       projectile visuals already provide the intended night visibility. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_LightFlamer" or defName="LG_HeavyFlamer"]/verbs/li/muzzleFlashScale</xpath>
+    <value>
+      <muzzleFlashScale>0</muzzleFlashScale>
+    </value>
+  </Operation>
+</Patch>
