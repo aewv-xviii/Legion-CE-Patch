@@ -37,4 +37,17 @@
       <drawSize>(1.7, 1.7)</drawSize>
     </graphicData>
   </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>LG_CE_PlasmaScorchMark</defName>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <solidTime>1.8</solidTime>
+    <fadeOutTime>1.4</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/BeamBurn/BeamBurn_A</texPath>
+      <shaderType>Transparent</shaderType>
+      <color>(0.18, 0.86, 1, 0.34)</color>
+      <drawSize>(1.15, 1.15)</drawSize>
+    </graphicData>
+  </FleckDef>
 </Defs>

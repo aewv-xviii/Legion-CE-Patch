@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CombatExtendedRecoilStateResetter.cs" />
-    <Compile Include="LegacyMuzzleFlashController.cs" />
+    <Compile Include="LegionWeaponEffectsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

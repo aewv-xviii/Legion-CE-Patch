@@ -17,7 +17,7 @@ namespace LegionCEPatch
 
         static Startup()
         {
-            LegacyMuzzleFlashController.Initialize();
+            LegionWeaponEffectsController.Initialize();
 
             var patchedMethods = new HashSet<MethodBase>();
             PatchMethod(AccessTools.DeclaredMethod("Verse.Verb_Shoot:TryCastShot"), patchedMethods);
@@ -25,6 +25,7 @@ namespace LegionCEPatch
             PatchMethod(AccessTools.DeclaredMethod("CombatExtended.Verb_ShootCE:TryCastShot"), patchedMethods);
             PatchMethod(AccessTools.DeclaredMethod("CombatExtended.Verb_LaunchProjectileCE:TryCastShot"), patchedMethods);
             PatchMethod(AccessTools.DeclaredMethod("CombatExtended.Verb_ShootMortarCE:TryCastShot"), patchedMethods);
+            PatchBeamLaunch();
             PatchDrawEquipmentAiming();
             PatchJobGiverReloadBypass();
         }
@@ -46,7 +47,23 @@ namespace LegionCEPatch
                 return;
             }
 
-            LegacyMuzzleFlashController.TryTrigger(__instance);
+            LegionWeaponEffectsController.TryTrigger(__instance);
+        }
+
+        private static void PatchBeamLaunch()
+        {
+            var method = AccessTools.DeclaredMethod(typeof(Beam), nameof(Beam.Launch));
+            if (method == null || method.GetMethodBody() == null)
+            {
+                return;
+            }
+
+            Harmony.Patch(method, postfix: new HarmonyMethod(typeof(Startup), nameof(BeamLaunchPostfix)));
+        }
+
+        public static void BeamLaunchPostfix(Beam __instance, Thing launcher, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, Thing equipment)
+        {
+            LegionWeaponEffectsController.TryTriggerPlasmaImpact(__instance, equipment, launcher, usedTarget, intendedTarget);
         }
 
         private static void PatchDrawEquipmentAiming()

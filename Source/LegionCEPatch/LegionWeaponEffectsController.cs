@@ -10,7 +10,7 @@ using Verse;
 
 namespace LegionCEPatch
 {
-    public static class LegacyMuzzleFlashController
+    public static class LegionWeaponEffectsController
     {
         private const string SourcePackageId = "Dogdough.Aegiscorp";
         private const bool DebugLightingLogs = true;
@@ -53,6 +53,8 @@ namespace LegionCEPatch
         private static FleckDef PlasmaShotFlashFleckDef;
         private static FleckDef PlasmaAmbientGlowFleckDef;
         private static FleckDef PlasmaAmbientGlowOuterFleckDef;
+        private static FleckDef PlasmaImpactSparkFleckDef;
+        private static FleckDef PlasmaScorchMarkFleckDef;
 
         public static void Initialize()
         {
@@ -70,6 +72,8 @@ namespace LegionCEPatch
             PlasmaShotFlashFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaShotFlash");
             PlasmaAmbientGlowFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaAmbientGlow");
             PlasmaAmbientGlowOuterFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaAmbientGlowOuter");
+            PlasmaImpactSparkFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("Fleck_BeamSpark");
+            PlasmaScorchMarkFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaScorchMark");
 
             var sourceMod = LoadedModManager.RunningModsListForReading.FirstOrDefault(
                 mod =>
@@ -78,7 +82,7 @@ namespace LegionCEPatch
 
             if (sourceMod == null)
             {
-                Log.Warning("[Legion CE Patch] Could not find Legion source mod while building muzzle flash lookup.");
+                Log.Warning("[Legion CE Patch] Could not find Legion source mod while building weapon effects lookup.");
                 return;
             }
 
@@ -188,7 +192,7 @@ namespace LegionCEPatch
                 }
             }
 
-            Log.Message($"[Legion CE Patch] Registered legacy muzzle flashes for {EffectersByWeaponDefName.Count} CE-converted Legion weapons.");
+            Log.Message($"[Legion CE Patch] Registered restored Legion muzzle flashes for {EffectersByWeaponDefName.Count} CE-converted Legion weapons.");
             if (DebugLightingLogs)
             {
                 foreach (var diagnostic in DiagnosticsByWeaponDefName.Values.OrderBy(item => item.WeaponDefName))
@@ -250,6 +254,51 @@ namespace LegionCEPatch
             }
 
             TryNotifyCombatExtendedLighting(verb, equipment, caster, targetInfoB, map);
+        }
+
+        public static void TryTriggerPlasmaImpact(Beam beam, Thing equipment, Thing launcher, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget)
+        {
+            if (beam == null || equipment == null || launcher == null)
+            {
+                return;
+            }
+
+            var weaponDef = equipment.def;
+            if (weaponDef == null || !PlasmaBeamWeaponDefNames.Contains(weaponDef.defName))
+            {
+                return;
+            }
+
+            var map = launcher.MapHeld;
+            if (map == null)
+            {
+                return;
+            }
+
+            var resolvedTarget = usedTarget.IsValid ? usedTarget : intendedTarget;
+            var impactCell = resolvedTarget.Cell;
+            if (!impactCell.IsValid)
+            {
+                return;
+            }
+
+            var impactPosition = GetImpactPosition(resolvedTarget, impactCell);
+
+            if (PlasmaImpactSparkFleckDef != null)
+            {
+                FleckMakerCE.Static(impactPosition, map, PlasmaImpactSparkFleckDef, 2.6f);
+            }
+
+            var impactFlashFleckDef = PlasmaShotFlashFleckDef ?? FleckDefOf.ShotFlash;
+            if (impactFlashFleckDef != null)
+            {
+                FleckMakerCE.Static(impactPosition, map, impactFlashFleckDef, 0.62f);
+            }
+
+            if (ShouldSpawnPlasmaScorchMark(resolvedTarget, impactCell, map) && PlasmaScorchMarkFleckDef != null)
+            {
+                FleckMaker.Static(impactPosition, map, PlasmaScorchMarkFleckDef, 0.36f);
+            }
         }
 
         private static TargetInfo GetTargetInfo(Verb verb, Map map, TargetInfo fallback)
@@ -359,13 +408,13 @@ namespace LegionCEPatch
             if (!DiagnosticsByWeaponDefName.TryGetValue(weaponDefName, out var diagnostic))
             {
                 Log.Message(
-                    $"[Legion CE Patch] No flash diagnostics for {weaponDefName}. " +
+                    $"[Legion CE Patch] No weapon-effect diagnostics for {weaponDefName}. " +
                     $"Verb={verb.GetType().FullName}, currentProjectile={verb.verbProps?.defaultProjectile?.defName ?? "null"}.");
                 return;
             }
 
             Log.Message(
-                $"[Legion CE Patch] Missing legacy flash mapping for {weaponDefName}. " +
+                $"[Legion CE Patch] Missing restored flash mapping for {weaponDefName}. " +
                 $"Verb={verb.GetType().FullName}, " +
                 $"sourceProjectile={diagnostic.SourceProjectileDefName}, " +
                 $"currentProjectile={diagnostic.CurrentProjectileDefName}, " +
@@ -600,6 +649,32 @@ namespace LegionCEPatch
             }
 
             return direction;
+        }
+
+        private static Vector3 GetImpactPosition(LocalTargetInfo usedTarget, IntVec3 impactCell)
+        {
+            if (usedTarget.IsValid && usedTarget.HasThing && usedTarget.Thing != null)
+            {
+                return usedTarget.Thing.TrueCenter();
+            }
+
+            return impactCell.ToVector3Shifted();
+        }
+
+        private static bool ShouldSpawnPlasmaScorchMark(LocalTargetInfo usedTarget, IntVec3 impactCell, Map map)
+        {
+            if (map == null || !impactCell.IsValid)
+            {
+                return false;
+            }
+
+            if (usedTarget.IsValid && usedTarget.HasThing && usedTarget.Thing != null)
+            {
+                return usedTarget.Thing.def?.category == ThingCategory.Building;
+            }
+
+            var terrain = impactCell.GetTerrain(map);
+            return terrain?.IsFloor ?? false;
         }
 
     }
