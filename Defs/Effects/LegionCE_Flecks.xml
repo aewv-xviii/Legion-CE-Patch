@@ -9,6 +9,7 @@
       <texPath>Things/Mote/ShotFlash</texPath>
       <shaderType>MoteGlow</shaderType>
       <color>(0.42, 0.76, 1, 0.92)</color>
+      <drawSize>(4.6, 4.6)</drawSize>
     </graphicData>
   </FleckDef>
 

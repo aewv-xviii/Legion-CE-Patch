@@ -286,13 +286,13 @@ namespace LegionCEPatch
 
             if (PlasmaImpactSparkFleckDef != null)
             {
-                FleckMakerCE.Static(impactPosition, map, PlasmaImpactSparkFleckDef, 2.6f);
+                FleckMakerCE.Static(impactPosition, map, PlasmaImpactSparkFleckDef, 7.8f);
             }
 
             var impactFlashFleckDef = PlasmaShotFlashFleckDef ?? FleckDefOf.ShotFlash;
             if (impactFlashFleckDef != null)
             {
-                FleckMakerCE.Static(impactPosition, map, impactFlashFleckDef, 0.62f);
+                FleckMakerCE.Static(impactPosition, map, impactFlashFleckDef, 2.25f);
             }
 
             if (ShouldSpawnPlasmaScorchMark(resolvedTarget, impactCell, map) && PlasmaScorchMarkFleckDef != null)
