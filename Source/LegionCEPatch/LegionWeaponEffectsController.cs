@@ -13,7 +13,7 @@ namespace LegionCEPatch
     public static class LegionWeaponEffectsController
     {
         private const string SourcePackageId = "Dogdough.Aegiscorp";
-        private const bool DebugLightingLogs = true;
+        private static readonly bool DebugLightingLogs = false;
 
         private sealed class WeaponFlashDiagnostic
         {
@@ -192,9 +192,9 @@ namespace LegionCEPatch
                 }
             }
 
-            Log.Message($"[Legion CE Patch] Registered restored Legion muzzle flashes for {EffectersByWeaponDefName.Count} CE-converted Legion weapons.");
             if (DebugLightingLogs)
             {
+                Log.Message($"[Legion CE Patch] Registered restored Legion muzzle flashes for {EffectersByWeaponDefName.Count} CE-converted Legion weapons.");
                 foreach (var diagnostic in DiagnosticsByWeaponDefName.Values.OrderBy(item => item.WeaponDefName))
                 {
                     Log.Message(

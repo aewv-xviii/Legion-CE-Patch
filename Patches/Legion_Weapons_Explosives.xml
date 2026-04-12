@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!-- Preserve Legion's original blast radii, but give HE ordnance explicit
+       damage values so the large-area explosions do not feel too diluted. -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE"]/projectile/damageAmountBase</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE"]/projectile</xpath>
+      <value>
+        <damageAmountBase>55</damageAmountBase>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE"]/projectile/damageAmountBase</xpath>
+      <value>
+        <damageAmountBase>55</damageAmountBase>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE"]/projectile/damageAmountBase</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE"]/projectile</xpath>
+      <value>
+        <damageAmountBase>55</damageAmountBase>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE"]/projectile/damageAmountBase</xpath>
+      <value>
+        <damageAmountBase>55</damageAmountBase>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmHE"]/projectile/damageAmountBase</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmHE"]/projectile</xpath>
+      <value>
+        <damageAmountBase>80</damageAmountBase>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmHE"]/projectile/damageAmountBase</xpath>
+      <value>
+        <damageAmountBase>80</damageAmountBase>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchHE"]/projectile/damageAmountBase</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchHE"]/projectile</xpath>
+      <value>
+        <damageAmountBase>130</damageAmountBase>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchHE"]/projectile/damageAmountBase</xpath>
+      <value>
+        <damageAmountBase>130</damageAmountBase>
+      </value>
+    </match>
+  </Operation>
+</Patch>

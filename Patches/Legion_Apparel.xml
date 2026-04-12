@@ -118,4 +118,204 @@
     </value>
   </Operation>
 
+  <!-- Light on-skin apparel -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Underwear" or defName="LG_Bungirl" or defName="LG_GeheimB" or defName="LG_Geheim"]/statBases</xpath>
+    <value>
+      <Bulk>1</Bulk>
+      <WornBulk>0.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Civilian and light middle apparel -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Peplos" or defName="LG_Tunica" or defName="LG_OfficeShirt" or defName="LG_CasualDress" or defName="LG_Tanktop"]/statBases</xpath>
+    <value>
+      <Bulk>2</Bulk>
+      <WornBulk>1</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Combat uniforms -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_CombatShirt" or defName="LG_LightCombatShirt" or defName="LG_Fatigue" or defName="LG_AdvancedFatigue" or defName="LG_UrbanBDU"]/statBases</xpath>
+    <value>
+      <Bulk>3</Bulk>
+      <WornBulk>1.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Coats and ponchos -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_OfficerCoat_Norm" or defName="LG_OfficerCoat_High" or defName="LG_PonchoRaincoat" or defName="LG_PonchoRaincoatB"]/statBases</xpath>
+    <value>
+      <Bulk>3</Bulk>
+      <WornBulk>1.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Light armor vest and operative layers -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_LightProtectiveVest" or defName="LG_InnerLayer"]/statBases</xpath>
+    <value>
+      <Bulk>4</Bulk>
+      <WornBulk>2</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Infiltration suits -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_InfiltrationSuit" or defName="LG_InfiltrationSuitExo" or defName="LG_Slavesuit"]/statBases</xpath>
+    <value>
+      <Bulk>5</Bulk>
+      <WornBulk>2.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Armored helmets -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_OldFlakHelmet" or defName="LG_ADVFlakHelmet" or defName="LG_RoyalPowerHelmet" or defName="LG_OfficerPowerHelmet"]/statBases</xpath>
+    <value>
+      <Bulk>4</Bulk>
+      <WornBulk>1</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Power armor variants -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_RoyalPowerArmor" or defName="LG_OfficerPowerArmor"]/statBases</xpath>
+    <value>
+      <Bulk>100</Bulk>
+      <WornBulk>15</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Utility masks and optics -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_HECUGasMask" or defName="LG_NightVision" or defName="LG_NightVisionWMask"]/statBases</xpath>
+    <value>
+      <Bulk>2</Bulk>
+      <WornBulk>1</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Light eyewear and facewear -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Monocle" or defName="LG_Sunglasses" or defName="LG_MediGoggle" or defName="LG_MouthTape" or defName="LG_MouthTapeForHum"]/statBases</xpath>
+    <value>
+      <Bulk>0.5</Bulk>
+      <WornBulk>0.25</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Cosmetic and light headwear -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_BungirlEar" or defName="LG_Beret" or defName="LG_BeretRadio" or defName="LG_Blackberet" or defName="LG_BlackberetRadio" or defName="LG_PeakedCap" or defName="LG_PeakedCapRadio"]/statBases</xpath>
+    <value>
+      <Bulk>1</Bulk>
+      <WornBulk>0.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Load-bearing gear -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Bandolier"]/statBases</xpath>
+    <value>
+      <Bulk>4</Bulk>
+      <WornBulk>2.5</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Bandolier"]/equippedStatOffsets</xpath>
+    <value>
+      <CarryBulk>8</CarryBulk>
+      <ReloadSpeed>0.06</ReloadSpeed>
+    </value>
+  </Operation>
+
+  <!-- Radio pack -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Radiopack"]/statBases</xpath>
+    <value>
+      <Bulk>12</Bulk>
+      <WornBulk>7</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Legion shields -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Fulcum"]/statBases</xpath>
+    <value>
+      <Bulk>8</Bulk>
+      <WornBulk>5</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Scutum"]/statBases</xpath>
+    <value>
+      <Bulk>12</Bulk>
+      <WornBulk>8</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Weapon-linked wearable gear -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_FlamenTankBelt"]/statBases</xpath>
+    <value>
+      <Bulk>14</Bulk>
+      <WornBulk>8</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_GMGAmmopack" or defName="LG_MinigunAmmopack" or defName="LG_PLMGAmmopack" or defName="LG_RecoillessRifleAmmopack"]/statBases</xpath>
+    <value>
+      <Bulk>12</Bulk>
+      <WornBulk>7</WornBulk>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_HeGrenade" or defName="LG_StunGrenade" or defName="LG_LWATL" or defName="LG_Medigunbelt"]/statBases</xpath>
+    <value>
+      <Bulk>3</Bulk>
+      <WornBulk>1.5</WornBulk>
+    </value>
+  </Operation>
+
+  <!-- Power armor carry profile -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_RoyalPowerArmor" or defName="LG_OfficerPowerArmor"]/equippedStatOffsets</xpath>
+    <value>
+      <CarryWeight>80</CarryWeight>
+      <CarryBulk>10</CarryBulk>
+      <ShootingAccuracyPawn>0.12</ShootingAccuracyPawn>
+    </value>
+  </Operation>
+
+  <!-- Minimal CE armor floor for unarmored wearable items -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LG_Bandolier" or defName="LG_Beret" or defName="LG_BeretRadio" or defName="LG_Blackberet" or defName="LG_BlackberetRadio" or defName="LG_BungirlEar" or defName="LG_FlamenTankBelt" or defName="LG_Geheim" or defName="LG_GMGAmmopack" or defName="LG_HeGrenade" or defName="LG_LWATL" or defName="LG_MediGoggle" or defName="LG_Medigunbelt" or defName="LG_MinigunAmmopack" or defName="LG_Monocle" or defName="LG_MouthTape" or defName="LG_MouthTapeForHum" or defName="LG_NightVision" or defName="LG_NightVisionWMask" or defName="LG_PeakedCap" or defName="LG_PeakedCapRadio" or defName="LG_Peplos" or defName="LG_PLMGAmmopack" or defName="LG_PonchoRaincoat" or defName="LG_Radiopack" or defName="LG_RecoillessRifleAmmopack" or defName="LG_Slavesuit" or defName="LG_StunGrenade" or defName="LG_Sunglasses" or defName="LG_Tunica"]/statBases</xpath>
+    <value>
+      <ArmorRating_Sharp>0.01</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.01</ArmorRating_Blunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Underwear"]/statBases/ArmorRating_Sharp</xpath>
+    <value>
+      <ArmorRating_Sharp>0.01</ArmorRating_Sharp>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LG_Underwear"]/statBases/ArmorRating_Blunt</xpath>
+    <value>
+      <ArmorRating_Blunt>0.01</ArmorRating_Blunt>
+    </value>
+  </Operation>
+
 </Patch>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -13,7 +14,11 @@ namespace LegionCEPatch
     public static class Startup
     {
         private const string SourcePackageId = "Dogdough.Aegiscorp";
+        private const string DeflectionNullVerbWarning =
+            "[CE] Deflection for Instigator:{0} Target:{1} DamageDef:{2} Weapon:{3} has null verb, overriding AP.";
         private static readonly Harmony Harmony = new Harmony("aewv.legioncepatch");
+        private static readonly MethodInfo ResolveFallbackPenMethod =
+            AccessTools.DeclaredMethod(typeof(LegionDeflectionFallbackController), nameof(LegionDeflectionFallbackController.ResolveFallbackPen));
 
         static Startup()
         {
@@ -28,6 +33,7 @@ namespace LegionCEPatch
             PatchBeamLaunch();
             PatchDrawEquipmentAiming();
             PatchJobGiverReloadBypass();
+            PatchDeflectDamageFallback();
         }
 
         private static void PatchMethod(MethodInfo method, ISet<MethodBase> patchedMethods)
@@ -64,6 +70,77 @@ namespace LegionCEPatch
         public static void BeamLaunchPostfix(Beam __instance, Thing launcher, LocalTargetInfo usedTarget, LocalTargetInfo intendedTarget, Thing equipment)
         {
             LegionWeaponEffectsController.TryTriggerPlasmaImpact(__instance, equipment, launcher, usedTarget, intendedTarget);
+        }
+
+        private static void PatchDeflectDamageFallback()
+        {
+            var method = AccessTools.Method(
+                "CombatExtended.ArmorUtilityCE:GetDeflectDamageInfo",
+                new[]
+                {
+                    typeof(DamageInfo),
+                    typeof(BodyPartRecord),
+                    typeof(float).MakeByRefType(),
+                    typeof(float).MakeByRefType(),
+                    typeof(bool)
+                });
+
+            if (method == null)
+            {
+                return;
+            }
+
+            Harmony.Patch(method, transpiler: new HarmonyMethod(typeof(Startup), nameof(DeflectDamageInfoTranspiler)));
+        }
+
+        public static IEnumerable<CodeInstruction> DeflectDamageInfoTranspiler(IEnumerable<CodeInstruction> instructions)
+        {
+            if (ResolveFallbackPenMethod == null)
+            {
+                return instructions;
+            }
+
+            var codes = instructions.ToList();
+            var startIndex = codes.FindIndex(
+                code =>
+                    code.opcode == OpCodes.Ldstr &&
+                    string.Equals(code.operand as string, DeflectionNullVerbWarning, StringComparison.Ordinal));
+
+            if (startIndex < 0)
+            {
+                Log.Warning("[Legion CE Patch] Failed to locate CE null-verb deflection warning block.");
+                return codes;
+            }
+
+            var endIndex = -1;
+            for (var index = startIndex; index < codes.Count; index++)
+            {
+                if (codes[index].opcode == OpCodes.Stloc_1)
+                {
+                    endIndex = index;
+                    break;
+                }
+            }
+
+            if (endIndex < 0)
+            {
+                Log.Warning("[Legion CE Patch] Failed to locate CE null-verb deflection fallback store.");
+                return codes;
+            }
+
+            var replacement = new List<CodeInstruction>
+            {
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, ResolveFallbackPenMethod),
+                new CodeInstruction(OpCodes.Stloc_1)
+            };
+
+            replacement[0].labels.AddRange(codes[startIndex].labels);
+            replacement[0].blocks.AddRange(codes[startIndex].blocks);
+
+            codes.RemoveRange(startIndex, endIndex - startIndex + 1);
+            codes.InsertRange(startIndex, replacement);
+            return codes;
         }
 
         private static void PatchDrawEquipmentAiming()
