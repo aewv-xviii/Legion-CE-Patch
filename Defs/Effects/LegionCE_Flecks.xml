@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <FleckDef ParentName="FleckBase">
+    <defName>LG_CE_PlasmaShotFlash</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.05</solidTime>
+    <fadeOutTime>0.05</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/ShotFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.42, 0.76, 1, 0.92)</color>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>LG_CE_PlasmaAmbientGlow</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.006</solidTime>
+    <fadeOutTime>0.02</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/FireGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.03, 0.94, 1, 0.48)</color>
+      <drawSize>(2.05, 2.05)</drawSize>
+    </graphicData>
+  </FleckDef>
+
+  <FleckDef ParentName="FleckBase">
+    <defName>LG_CE_PlasmaAmbientGlowOuter</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.006</solidTime>
+    <fadeOutTime>0.02</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/FireGlow</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(0.16, 0.48, 1, 0.34)</color>
+      <drawSize>(1.7, 1.7)</drawSize>
+    </graphicData>
+  </FleckDef>
+</Defs>

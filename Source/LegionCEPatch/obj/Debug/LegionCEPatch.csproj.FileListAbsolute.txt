@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Assemblies\LegionCEPatch.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Assemblies\LegionCEPatch.pdb
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Source\LegionCEPatch\obj\Debug\LegionCEPatch.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Source\LegionCEPatch\obj\Debug\LegionCEPatch.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Source\LegionCEPatch\obj\Debug\LegionCEPatch.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ce.patch.legion\Source\LegionCEPatch\obj\Debug\LegionCEPatch.pdb

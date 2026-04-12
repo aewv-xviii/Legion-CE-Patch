@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[(defName="LG_PlasSMG" or defName="LG_PlasRifle" or defName="LG_PlasRifleBay" or defName="LG_PlasRifleGrenadier" or defName="LG_PlasRifleMedic" or defName="LG_PlasSniperRifle" or defName="LG_HeavyPlasmaMGA" or defName="LG_HeavyPlasmaMGB") and not(verbs/li/soundAiming)]/verbs/li</xpath>
+    <value>
+      <soundAiming>PsychicArtifactWarmupSustained</soundAiming>
+    </value>
+  </Operation>
+</Patch>

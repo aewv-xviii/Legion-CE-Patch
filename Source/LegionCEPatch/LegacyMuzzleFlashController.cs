@@ -34,11 +34,18 @@ namespace LegionCEPatch
         private static readonly Dictionary<string, WeaponFlashDiagnostic> DiagnosticsByWeaponDefName =
             new Dictionary<string, WeaponFlashDiagnostic>(StringComparer.OrdinalIgnoreCase);
 
+        private static readonly HashSet<string> PlasmaBeamWeaponDefNames =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         private static readonly Dictionary<Verb, int> LastProcessedShotTickByVerb =
             new Dictionary<Verb, int>();
 
         private static readonly HashSet<string> LoggedMissingDiagnostics =
             new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        private static FleckDef PlasmaShotFlashFleckDef;
+        private static FleckDef PlasmaAmbientGlowFleckDef;
+        private static FleckDef PlasmaAmbientGlowOuterFleckDef;
 
         public static void Initialize()
         {
@@ -50,8 +57,12 @@ namespace LegionCEPatch
             EffectersByWeaponDefName.Clear();
             OriginalMuzzleFlashScaleByWeaponDefName.Clear();
             DiagnosticsByWeaponDefName.Clear();
+            PlasmaBeamWeaponDefNames.Clear();
             LastProcessedShotTickByVerb.Clear();
             LoggedMissingDiagnostics.Clear();
+            PlasmaShotFlashFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaShotFlash");
+            PlasmaAmbientGlowFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaAmbientGlow");
+            PlasmaAmbientGlowOuterFleckDef = DefDatabase<FleckDef>.GetNamedSilentFail("LG_CE_PlasmaAmbientGlowOuter");
 
             var sourceMod = LoadedModManager.RunningModsListForReading.FirstOrDefault(
                 mod =>
@@ -67,6 +78,7 @@ namespace LegionCEPatch
             var projectileEffecters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var sourceProjectilesByWeapon = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var sourceMuzzleFlashScaleByWeapon = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+            var plasmaBeamProjectiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var asset in sourceMod.LoadDefs(false))
             {
@@ -91,6 +103,11 @@ namespace LegionCEPatch
                         if (!string.IsNullOrEmpty(effecterDefName) && !projectileEffecters.ContainsKey(defName))
                         {
                             projectileEffecters[defName] = effecterDefName;
+                        }
+
+                        if (IsPlasmaBeamProjectile(thingDef))
+                        {
+                            plasmaBeamProjectiles.Add(defName);
                         }
 
                         var projectileDefName = TryGetWeaponProjectileDefName(thingDef);
@@ -139,6 +156,11 @@ namespace LegionCEPatch
                 if (sourceMuzzleFlashScaleByWeapon.TryGetValue(pair.Key, out var originalMuzzleFlashScaleForRegistration))
                 {
                     OriginalMuzzleFlashScaleByWeaponDefName[currentWeapon.defName] = originalMuzzleFlashScaleForRegistration;
+                }
+
+                if (plasmaBeamProjectiles.Contains(pair.Value))
+                {
+                    PlasmaBeamWeaponDefNames.Add(currentWeapon.defName);
                 }
 
                 if (string.IsNullOrEmpty(effecterDefName) || string.IsNullOrEmpty(currentProjectileDefName))
@@ -295,6 +317,31 @@ namespace LegionCEPatch
             return value;
         }
 
+        private static bool IsPlasmaBeamProjectile(XElement thingDef)
+        {
+            var thingClass = thingDef.Element("thingClass")?.Value?.Trim();
+            var projectileElement = thingDef.Element("projectile");
+            if (projectileElement == null)
+            {
+                return false;
+            }
+
+            var beamMoteDef = projectileElement.Element("beamMoteDef")?.Value?.Trim();
+            var damageDef = projectileElement.Element("damageDef")?.Value?.Trim();
+
+            var isBeamProjectile =
+                (!string.IsNullOrEmpty(thingClass) && thingClass.EndsWith("Beam", StringComparison.OrdinalIgnoreCase)) ||
+                !string.IsNullOrEmpty(beamMoteDef);
+
+            if (!isBeamProjectile)
+            {
+                return false;
+            }
+
+            return string.Equals(damageDef, "Bullet_Plasma", StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(beamMoteDef, "Mote_LRBeamLaser", StringComparison.OrdinalIgnoreCase);
+        }
+
         private static void TryLogMissingDiagnostic(string weaponDefName, Verb verb)
         {
             if (!DebugLightingLogs || !LoggedMissingDiagnostics.Add(weaponDefName))
@@ -367,7 +414,11 @@ namespace LegionCEPatch
                 return;
             }
 
-            var visualFlashLocation = GetVisualFlashLocation(caster, equipment, targetInfoB);
+            var isPlasmaBeamWeapon = PlasmaBeamWeaponDefNames.Contains(weaponDefName);
+            var isSidearmWeapon = IsSidearmWeapon(equipment.def, originalMuzzleFlashScale);
+            var visualIntensity = GetVisualFlashIntensity(intensity, isPlasmaBeamWeapon, isSidearmWeapon);
+            var lightingIntensity = GetLightingIntensity(intensity, isPlasmaBeamWeapon);
+            var visualFlashLocation = GetVisualFlashLocation(caster, equipment, targetInfoB, isSidearmWeapon);
             var lightingTracker = map?.GetComponent<LightingTracker>();
             if (lightingTracker == null)
             {
@@ -379,22 +430,149 @@ namespace LegionCEPatch
                 return;
             }
 
-            FleckMakerCE.Static(visualFlashLocation, map, FleckDefOf.ShotFlash, intensity);
-            lightingTracker.Notify_ShotsFiredAt(caster.PositionHeld, intensity);
+            var visualFlashFleckDef = GetVisualFlashFleckDef(isPlasmaBeamWeapon);
+            if (visualIntensity > 0f && visualFlashFleckDef != null)
+            {
+                FleckMakerCE.Static(visualFlashLocation, map, visualFlashFleckDef, visualIntensity);
+            }
+
+            var ambientGlowFleckDef = GetAmbientGlowFleckDef(isPlasmaBeamWeapon);
+            if (ambientGlowFleckDef != null)
+            {
+                var ambientGlowIntensity = GetAmbientGlowIntensity(visualIntensity);
+                if (ambientGlowIntensity > 0f)
+                {
+                    SpawnAmbientGlow(caster, targetInfoB, map, ambientGlowFleckDef, ambientGlowIntensity);
+                }
+            }
+
+            if (lightingIntensity > 0f)
+            {
+                lightingTracker.Notify_ShotsFiredAt(caster.PositionHeld, lightingIntensity);
+            }
 
             if (DebugLightingLogs)
             {
                 Log.Message(
                     $"[Legion CE Patch] CE lighting notified for {weaponDefName} at {caster.PositionHeld} with visual flash at {visualFlashLocation}: " +
                     $"verb={verb.GetType().FullName}, " +
+                    $"plasmaBeam={isPlasmaBeamWeapon}, " +
+                    $"sidearm={isSidearmWeapon}, " +
                     $"originalScale={originalMuzzleFlashScale.ToString(CultureInfo.InvariantCulture)}, " +
                     $"multiplier={muzzleFlashMultiplier.ToString(CultureInfo.InvariantCulture)}, " +
                     $"offset={muzzleFlashOffset.ToString(CultureInfo.InvariantCulture)}, " +
-                    $"intensity={intensity.ToString(CultureInfo.InvariantCulture)}.");
+                    $"baseIntensity={intensity.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"visualIntensity={visualIntensity.ToString(CultureInfo.InvariantCulture)}, " +
+                    $"ambientGlowIntensity={GetAmbientGlowIntensity(visualIntensity).ToString(CultureInfo.InvariantCulture)}, " +
+                    $"lightingIntensity={lightingIntensity.ToString(CultureInfo.InvariantCulture)}.");
             }
         }
 
-        private static Vector3 GetVisualFlashLocation(Thing caster, ThingWithComps equipment, TargetInfo targetInfo)
+        private static FleckDef GetVisualFlashFleckDef(bool isPlasmaBeamWeapon)
+        {
+            if (isPlasmaBeamWeapon)
+            {
+                return PlasmaShotFlashFleckDef ?? FleckDefOf.ShotFlash;
+            }
+
+            return FleckDefOf.ShotFlash;
+        }
+
+        private static FleckDef GetAmbientGlowFleckDef(bool isPlasmaBeamWeapon)
+        {
+            if (!isPlasmaBeamWeapon)
+            {
+                return null;
+            }
+
+            return PlasmaAmbientGlowFleckDef;
+        }
+
+        private static float GetVisualFlashIntensity(float baseIntensity, bool isPlasmaBeamWeapon, bool isSidearmWeapon)
+        {
+            var visualIntensity = baseIntensity;
+            if (isPlasmaBeamWeapon)
+            {
+                visualIntensity *= 0.92f;
+            }
+
+            if (isSidearmWeapon)
+            {
+                visualIntensity = Mathf.Max(visualIntensity * 1.35f, 4.8f);
+            }
+
+            return visualIntensity;
+        }
+
+        private static float GetAmbientGlowIntensity(float visualIntensity)
+        {
+            return Mathf.Max(0f, visualIntensity * 0.28f);
+        }
+
+        private static float GetLightingIntensity(float baseIntensity, bool isPlasmaBeamWeapon)
+        {
+            if (isPlasmaBeamWeapon)
+            {
+                return baseIntensity * 0.0f;
+            }
+
+            return baseIntensity;
+        }
+
+        private static bool IsSidearmWeapon(ThingDef weaponDef, float originalMuzzleFlashScale)
+        {
+            if (weaponDef.weaponTags != null)
+            {
+                foreach (var tag in weaponDef.weaponTags)
+                {
+                    if (string.Equals(tag, "CE_Sidearm", StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(tag, "CE_OneHandedWeapon", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            var drawSize = weaponDef.graphicData?.drawSize.x ?? 0f;
+            return originalMuzzleFlashScale <= 4.1f && drawSize <= 0.85f;
+        }
+
+        private static Vector3 GetVisualFlashLocation(Thing caster, ThingWithComps equipment, TargetInfo targetInfo, bool isSidearmWeapon)
+        {
+            var source = caster.DrawPos;
+            var direction = GetShotDirection(caster, targetInfo);
+
+            var drawSize = equipment.def.graphicData?.drawSize.x ?? 1f;
+            var forwardOffset = isSidearmWeapon
+                ? Mathf.Clamp(drawSize * 0.58f, 0.45f, 0.75f)
+                : Mathf.Clamp(drawSize * 0.42f, 0.35f, 0.95f);
+            return source + direction * forwardOffset;
+        }
+
+        private static void SpawnAmbientGlow(Thing caster, TargetInfo targetInfo, Map map, FleckDef ambientGlowFleckDef, float ambientGlowIntensity)
+        {
+            if (caster == null || map == null || ambientGlowFleckDef == null || ambientGlowIntensity <= 0f)
+            {
+                return;
+            }
+
+            var source = caster.DrawPos;
+            var direction = GetShotDirection(caster, targetInfo);
+            var lateral = new Vector3(-direction.z, 0f, direction.x);
+            if (lateral == Vector3.zero)
+            {
+                lateral = Vector3.right;
+            }
+
+            var outerGlowFleckDef = PlasmaAmbientGlowOuterFleckDef ?? ambientGlowFleckDef;
+
+            FleckMakerCE.Static(source, map, ambientGlowFleckDef, ambientGlowIntensity * 0.7f);
+            FleckMakerCE.Static(source + direction * 0.1f, map, ambientGlowFleckDef, ambientGlowIntensity * 0.48f);
+            FleckMakerCE.Static(source - direction * 0.02f + lateral * 0.1f, map, outerGlowFleckDef, ambientGlowIntensity * 0.28f);
+            FleckMakerCE.Static(source - direction * 0.02f - lateral * 0.1f, map, outerGlowFleckDef, ambientGlowIntensity * 0.28f);
+        }
+
+        private static Vector3 GetShotDirection(Thing caster, TargetInfo targetInfo)
         {
             var source = caster.DrawPos;
             var target = targetInfo.IsValid ? targetInfo.CenterVector3 : source + Vector3.forward;
@@ -404,9 +582,7 @@ namespace LegionCEPatch
                 direction = Vector3.forward;
             }
 
-            var drawSize = equipment.def.graphicData?.drawSize.x ?? 1f;
-            var forwardOffset = Mathf.Clamp(drawSize * 0.42f, 0.35f, 0.95f);
-            return source + direction * forwardOffset;
+            return direction;
         }
 
     }
