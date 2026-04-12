@@ -1,0 +1,7 @@
+.dotnet/
+.vs/
+bin/
+obj/
+*.user
+*.rsuser
+*.suo
