@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Legion exception weapons keep their original verbs/projectile classes, but
+       their projectile properties need CE sharp/blunt penetration values. -->
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasSMG" or defName="Bullet_PlasRifle" or defName="Bullet_PlasSniperRifle" or defName="Bullet_PlasMG" or defName="Bullet_LG_HeavyMGFifty" or defName="Bullet_LG_HeavyMinigun" or defName="Bullet_LG_40mmAutoGrenadeLauncherProjectile" or defName="Bullet_LG_84mmHEAT" or defName="Bullet_FlamyLightFlame" or defName="Bullet_FlamyHeavyFlame" or defName="Bullet_TurretFiftyCal" or defName="Bullet_TwinTurretFiftyCal" or defName="Bullet_TwinTurret30mm"]/projectile</xpath>
+    <attribute>Class</attribute>
+    <value>CombatExtended.ProjectilePropertiesCE</value>
+  </Operation>
+
+  <!-- Plasma beams keep Legion's original Beam class. Beam damage still reads
+       armorPenetrationBase, so mirror the CE sharp AP there as well. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasSMG"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>35</armorPenetrationSharp>
+      <armorPenetrationBlunt>4</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasSMG"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>35</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasRifle"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>50</armorPenetrationSharp>
+      <armorPenetrationBlunt>4</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasRifle"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>50</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasSniperRifle"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>70</armorPenetrationSharp>
+      <armorPenetrationBlunt>4</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasSniperRifle"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>70</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasMG"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>45</armorPenetrationSharp>
+      <armorPenetrationBlunt>4</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_PlasMG"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>45</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <!-- .50 BMG-equivalent Legion exception rounds. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_HeavyMGFifty" or defName="Bullet_LG_HeavyMinigun" or defName="Bullet_TurretFiftyCal" or defName="Bullet_TwinTurretFiftyCal"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>28</armorPenetrationSharp>
+      <armorPenetrationBlunt>360.34</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_HeavyMGFifty" or defName="Bullet_LG_HeavyMinigun"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>28</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_TurretFiftyCal" or defName="Bullet_TwinTurretFiftyCal"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>28</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <!-- Explosive direct-hit exception rounds. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_40mmAutoGrenadeLauncherProjectile"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>20</armorPenetrationSharp>
+      <armorPenetrationBlunt>66.72</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_40mmAutoGrenadeLauncherProjectile"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>20</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_84mmHEAT" or defName="Bullet_TwinTurret30mm"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>70</armorPenetrationSharp>
+      <armorPenetrationBlunt>3849.48</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_84mmHEAT"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>70</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_TwinTurret30mm"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>70</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <!-- Flamers do not get ballistic penetration. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_FlamyLightFlame" or defName="Bullet_FlamyHeavyFlame"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>0</armorPenetrationSharp>
+      <armorPenetrationBlunt>0</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_FlamyLightFlame" or defName="Bullet_FlamyHeavyFlame"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>0</armorPenetrationBase>
+    </value>
+  </Operation>
+
+</Patch>

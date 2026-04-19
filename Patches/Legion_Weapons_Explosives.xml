@@ -3,6 +3,151 @@
   <!-- Preserve Legion's original blast radii, but give HE ordnance explicit
        damage values so the large-area explosions do not feel too diluted. -->
 
+  <!-- Artillery shells keep their original Legion projectile classes/radii, but
+       need CE projectile properties and CE-scale AP so power armor does not
+       null the original blast/fragment damage with a harmless deflection. -->
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE" or defName="Bullet_Shell_81mmHE" or defName="Bullet_Shell_81mmShrapnel" or defName="Bullet_Shell_81mmIncendiary" or defName="Bullet_Shell_81mmSmoke" or defName="Bullet_Shell_81mmHEForSUP" or defName="Bullet_Shell_81mmShrapForSUP" or defName="Bullet_Shell_81mmIncendiaryForSUP" or defName="Bullet_Shell_81mmSmokeForSUP" or defName="Bullet_Shell_155mmHE" or defName="Bullet_Shell_155mmShrapnel" or defName="Bullet_Shell_155mmIncendiary" or defName="Bullet_Shell_155mmCanister" or defName="Bullet_Shell_155mmClusterMine" or defName="Bullet_Shell_155mmClusterMineSonA" or defName="Bullet_Shell_155mmHEforSUP" or defName="Bullet_Shell_155mmShrapnelforSUP" or defName="Bullet_Shell_155mmIncendiaryForSUP" or defName="Bullet_Shell_16inchHE" or defName="Bullet_Shell_16inchShrapnel" or defName="Bullet_Shell_16inchIncendiary" or defName="Bullet_Shell_16inchCanister" or defName="Bullet_Shell_16inchCluster" or defName="Bullet_Shell_16inchClusterSonA" or defName="Bullet_Shell_16inchClusterSonB" or defName="Bullet_Shell_16inchClusterMine" or defName="Bullet_Shell_16inchClusterMineSonA" or defName="Bullet_Shell_16inchClusterMineSonB" or defName="Bullet_Shell_16inchHEForSUP" or defName="Bullet_Shell_16inchIncendiaryForSUP" or defName="Bullet_Shell_16inchClusterMineFORSUP"]/projectile</xpath>
+    <attribute>Class</attribute>
+    <value>CombatExtended.ProjectilePropertiesCE</value>
+  </Operation>
+
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/ThingDef[defName="Bullet_25mmFragment" or defName="Bullet_81mmFragmentA" or defName="Bullet_81mmFragmentB" or defName="Bullet_155mmFragmentA" or defName="Bullet_16inchFragmentA"]/projectile</xpath>
+    <attribute>Class</attribute>
+    <value>CombatExtended.ProjectilePropertiesCE</value>
+  </Operation>
+
+  <!-- Direct blast AP. Bomb uses Sharp armor, so these values prevent "ting, no damage"
+       results while keeping Legion's original projectile logic and blast radii. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>20</armorPenetrationSharp>
+      <armorPenetrationBlunt>45</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_LG_70mmHE"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>20</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE" or defName="Bullet_Shell_81mmHEForSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>18</armorPenetrationSharp>
+      <armorPenetrationBlunt>35</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE" or defName="Bullet_Shell_81mmHEForSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>18</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmHE" or defName="Bullet_Shell_155mmHEforSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>35</armorPenetrationSharp>
+      <armorPenetrationBlunt>80</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmHE" or defName="Bullet_Shell_155mmHEforSUP"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>35</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchHE" or defName="Bullet_Shell_16inchHEForSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>55</armorPenetrationSharp>
+      <armorPenetrationBlunt>160</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchHE" or defName="Bullet_Shell_16inchHEForSUP"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>55</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <!-- Fragmentation shells and spawned fragments stay dangerous to armored targets,
+       but below dedicated anti-armor rounds. -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmShrapnel" or defName="Bullet_Shell_81mmShrapForSUP" or defName="Bullet_81mmFragmentA" or defName="Bullet_81mmFragmentB" or defName="Bullet_25mmFragment"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>20</armorPenetrationSharp>
+      <armorPenetrationBlunt>35</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmShrapnel" or defName="Bullet_Shell_81mmShrapForSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>20</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_81mmFragmentA" or defName="Bullet_81mmFragmentB" or defName="Bullet_25mmFragment"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>20</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmCanister" or defName="Bullet_Shell_155mmShrapnel" or defName="Bullet_Shell_155mmClusterMine" or defName="Bullet_Shell_155mmClusterMineSonA" or defName="Bullet_Shell_155mmShrapnelforSUP" or defName="Bullet_155mmFragmentA"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>35</armorPenetrationSharp>
+      <armorPenetrationBlunt>80</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_155mmCanister" or defName="Bullet_Shell_155mmShrapnel" or defName="Bullet_Shell_155mmClusterMine" or defName="Bullet_Shell_155mmClusterMineSonA" or defName="Bullet_Shell_155mmShrapnelforSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>35</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_155mmFragmentA"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>35</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchCanister" or defName="Bullet_Shell_16inchShrapnel" or defName="Bullet_Shell_16inchCluster" or defName="Bullet_Shell_16inchClusterSonA" or defName="Bullet_Shell_16inchClusterSonB" or defName="Bullet_Shell_16inchClusterMine" or defName="Bullet_Shell_16inchClusterMineSonA" or defName="Bullet_Shell_16inchClusterMineSonB" or defName="Bullet_Shell_16inchClusterMineFORSUP" or defName="Bullet_16inchFragmentA"]/projectile</xpath>
+    <value>
+      <armorPenetrationSharp>45</armorPenetrationSharp>
+      <armorPenetrationBlunt>120</armorPenetrationBlunt>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bullet_Shell_16inchCanister" or defName="Bullet_Shell_16inchShrapnel" or defName="Bullet_Shell_16inchCluster" or defName="Bullet_Shell_16inchClusterSonA" or defName="Bullet_Shell_16inchClusterSonB" or defName="Bullet_Shell_16inchClusterMine" or defName="Bullet_Shell_16inchClusterMineSonA" or defName="Bullet_Shell_16inchClusterMineSonB" or defName="Bullet_Shell_16inchClusterMineFORSUP"]/projectile</xpath>
+    <value>
+      <armorPenetrationBase>45</armorPenetrationBase>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bullet_16inchFragmentA"]/projectile/armorPenetrationBase</xpath>
+    <value>
+      <armorPenetrationBase>45</armorPenetrationBase>
+    </value>
+  </Operation>
+
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ThingDef[defName="Bullet_Shell_81mmHE"]/projectile/damageAmountBase</xpath>
     <nomatch Class="PatchOperationAdd">
